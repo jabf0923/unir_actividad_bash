@@ -1,21 +1,22 @@
 #!/bin/bash
 
-# Verificar el número de argumentos
+# Verificar la cantidad de parámetros
 if [ "$#" -ne 2 ]; then
-  echo "Este script requiere exactamente dos argumentos: origen y destino."
+  echo "Este script requiere exactamente dos parámetros."
+  echo "Uso: $0 <archivo_origen> <archivo_destino>"
+  exit 1
+fi
+#Obtener argumentos
+archivo_origen="$1"
+archivo_destino="$2"
+
+# Verificar si el archivo de origen existe
+if [ ! -f "$archivo_origen" ]; then
+  echo "El archivo de origen '$archivo_origen' no existe."
   exit 1
 fi
 
-origen="$1"
-destino="$2"
+# Copiar el archivo de origen al archivo de destino
+cp "$archivo_origen" "$archivo_destino"
 
-# Verificar si el origen es un archivo existente
-if [ ! -f "$origen" ]; then
-  echo "El archivo de origen '$origen' no existe."
-  exit 1
-fi
-
-# Copiar el archivo de origen al destino
-cp "$origen" "$destino"
-
-echo "El archivo '$origen' ha sido copiado sobre '$destino'."
+echo "El archivo '$archivo_origen' ha sido copiado exitosamente a '$archivo_destino'."
